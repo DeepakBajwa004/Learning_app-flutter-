@@ -177,3 +177,36 @@ class _IAmStudentContainerState extends State<IAmStudentContainer> {
   }
 
 }
+
+
+class loginbtnnnn extends StatelessWidget {
+  const loginbtnnnn({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      height: 60,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.blue.shade50,
+            Colors.blue.shade300,
+            Colors.blue.shade50,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const Center(
+          child: Text(
+            'Sign up',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          )),
+    );
+  }
+}
