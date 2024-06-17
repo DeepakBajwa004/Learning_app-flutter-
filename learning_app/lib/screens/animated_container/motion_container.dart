@@ -39,7 +39,12 @@ class _MotionDemoPageState extends State<MotionDemoPage> {
                       height: 80,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [
+                          colors:controller.isTutor.value?[
+                            Colors.blue.shade900,
+                            Colors.blue.shade400,
+                            Colors.blue.shade200,
+
+                          ]:[
                             Colors.purpleAccent.shade200,
                             Colors.purpleAccent.shade400,
                             Colors.purple.shade700,
@@ -103,7 +108,6 @@ class _IAmStudentContainerState extends State<IAmStudentContainer> {
 
     return Motion.elevated(
         controller: MotionController(damping: defaultDampingFactor,maxAngle: defaultMaxAngle,),
-
         elevation: 50,
                 borderRadius: cardBorderRadius,
                 child:  Obx(
@@ -121,10 +125,14 @@ class _IAmStudentContainerState extends State<IAmStudentContainer> {
                       height: 80,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [
-                            Colors.purple.shade700,
-                            Colors.purpleAccent.shade400,
+                          colors:    controller.isStudent.value?[
+                            Colors.blue.shade900,
+                            Colors.blue.shade400,
+                            Colors.blue.shade200,
+                          ]:[
                             Colors.purpleAccent.shade200,
+                            Colors.purpleAccent.shade400,
+                            Colors.purple.shade700,
                           ],
                         ),
                         borderRadius: BorderRadius.circular(10),

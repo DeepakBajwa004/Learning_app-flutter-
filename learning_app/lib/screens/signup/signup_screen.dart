@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_common/get_reset.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:learning_app/controller/signup/signup_controller.dart';
 import 'package:learning_app/screens/animated_container/motion_container.dart';
+import 'package:learning_app/screens/category/category_screen.dart';
 import 'package:learning_app/screens/login/login_screen.dart';
 import 'package:motion/motion.dart';
 
@@ -12,48 +11,57 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller=Get.put(SignupController());
-      return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            'Create new account',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
+    final controller = Get.put(SignupController());
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Create new account',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                const Text(
-                  "Create a new account if you don't have",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(child: IAmStudentContainer()),
-                    SizedBox(width: 10,),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                "Create a new account if you don't have",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(child: IAmStudentContainer()),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Expanded(child: MotionDemoPage())
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Form(
-                  key: controller.formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Form(
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    Motion.elevated(
+                      elevation: 100,
+                      controller: MotionController(
+                        damping: defaultDampingFactor,
+                        maxAngle: defaultMaxAngle,
+                      ),
+                      shadow: false,
+                      child: TextFormField(
                         controller: controller.name,
                         decoration: InputDecoration(
                           hintText: 'Ex- Johny Sins',
@@ -63,13 +71,21 @@ class SignupScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Motion.elevated(
+                      elevation: 100,
+                      controller: MotionController(
+                        damping: defaultDampingFactor,
+                        maxAngle: defaultMaxAngle,
                       ),
-                      TextFormField(
+                      shadow: false,
+                      child: TextFormField(
                         controller: controller.email,
-                        validator: (value){
-                        return  controller.emailValidator(value);
+                        validator: (value) {
+                          // return controller.emailValidator(value);
                         },
                         decoration: InputDecoration(
                           hintText: 'Ex- JohnySins@gmail.com',
@@ -79,10 +95,18 @@ class SignupScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Motion.elevated(
+                      elevation: 100,
+                      controller: MotionController(
+                        damping: defaultDampingFactor,
+                        maxAngle: defaultMaxAngle,
                       ),
-                      TextFormField(
+                      shadow: false,
+                      child: TextFormField(
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             onPressed: () {},
@@ -95,23 +119,23 @@ class SignupScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                InkWell(
-                  onTap: () {
-                    if(controller.formKey.currentState!.validate()){
-                      Get.to(LoginScreen());
-                    }
-                  },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              InkWell(
+                onTap: () {
+                  if (controller.formKey.currentState!.validate()) {
+                    Get.to(const CategoryScreen());
+                  }
+                },
+                child: Motion.elevated(
+                  elevation: 50,
                   child: Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
+                    width: MediaQuery.of(context).size.width,
                     height: 60,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -125,26 +149,27 @@ class SignupScreen extends StatelessWidget {
                     ),
                     child: const Center(
                         child: Text(
-                          'Sign up',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        )),
+                      'Sign up',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
                   ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height/7.9,),
-
-                const Text('Already have an account'),
-                SizedBox(
-                  height: 30,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.to(()=>LoginScreen());
-                  },
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 7.9,
+              ),
+              const Text('Already have an account'),
+              const SizedBox(
+                height: 30,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const LoginScreen(),transition: Transition.zoom);
+                },
+                child: Motion.elevated(
+                  elevation: 50,
                   child: Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
+                    width: MediaQuery.of(context).size.width,
                     height: 60,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -158,15 +183,16 @@ class SignupScreen extends StatelessWidget {
                     ),
                     child: const Center(
                         child: Text(
-                          'Sign in',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        )),
+                      'Sign in',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      );
-    }}
-
+      ),
+    );
+  }
+}

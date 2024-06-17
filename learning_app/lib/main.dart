@@ -26,6 +26,9 @@
 // }
 
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:learning_app/screens/category/category_screen.dart';
+import 'package:learning_app/screens/login/login_screen.dart';
+import 'package:learning_app/screens/search/search_screen.dart';
 import 'package:learning_app/screens/signup/signup_screen.dart';
 import 'package:motion/motion.dart';
 import 'package:flutter/material.dart' hide Card;

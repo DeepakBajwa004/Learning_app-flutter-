@@ -11,8 +11,8 @@ class SignupController extends GetxController{
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
   String? emailValidator(String?value){
     if(value!.isEmpty){
-      return 'Enter a valid email address';
+      return 'E♦nter a valid email address';
     }
-    return 'null';
+    return null;
   }
 }
