@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:learning_app/controller/signup/signup_controller.dart';
 import 'package:learning_app/screens/animated_container/motion_container.dart';
 import 'package:learning_app/screens/category/category_screen.dart';
 import 'package:learning_app/screens/login/login_screen.dart';
 import 'package:motion/motion.dart';
+
+import '../bottom_nav_bar/bottom_nav_bar.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -36,14 +39,11 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                // mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(child: IAmStudentContainer()),
-                  SizedBox(
-                    width: 10,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(child: IAmStudentContainer()),
+                    SizedBox(width: 10,),
                   Expanded(child: MotionDemoPage())
                 ],
               ),
@@ -67,9 +67,10 @@ class SignupScreen extends StatelessWidget {
                           hintText: 'Ex- Johny Sins',
                           labelText: 'Enter you name',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        validator: (value)=> controller.nameValidator(value),
                       ),
                     ),
                     const SizedBox(
@@ -85,13 +86,13 @@ class SignupScreen extends StatelessWidget {
                       child: TextFormField(
                         controller: controller.email,
                         validator: (value) {
-                          // return controller.emailValidator(value);
+                           return controller.emailValidator(value);
                         },
                         decoration: InputDecoration(
                           hintText: 'Ex- JohnySins@gmail.com',
                           labelText: 'Enter you email',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
@@ -106,7 +107,8 @@ class SignupScreen extends StatelessWidget {
                         maxAngle: defaultMaxAngle,
                       ),
                       shadow: false,
-                      child: TextFormField(
+                      child:TextFormField(
+                        controller: controller.password,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             onPressed: () {},
@@ -115,9 +117,10 @@ class SignupScreen extends StatelessWidget {
                           hintText: 'Ex- JohnySins@12345',
                           labelText: 'Enter you password',
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        validator: (value)=> controller.passwordValidator(value),
                       ),
                     ),
                   ],
@@ -133,30 +136,30 @@ class SignupScreen extends StatelessWidget {
                   }
                 },
                 child: Motion.elevated(
-                  elevation: 50,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.blue.shade400,
-                          Colors.blue.shade800,
-                          Colors.blue.shade900,
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(10),
+                  elevation: 50,child:
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blue.shade400,
+                        Colors.blue.shade800,
+                        Colors.blue.shade900,
+                      ],
                     ),
-                    child: const Center(
-                        child: Text(
-                      'Sign up',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )),
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  child: const Center(
+                      child: Text(
+                    'Sign up',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )),
                 ),
               ),
+              ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 7.9,
+                height: MediaQuery.of(context).size.height / 10.4,
               ),
               const Text('Already have an account'),
               const SizedBox(
@@ -168,6 +171,10 @@ class SignupScreen extends StatelessWidget {
                 },
                 child: Motion.elevated(
                   elevation: 50,
+                  child: GestureDetector(
+                  onTap: () {
+                    Get.to(()=>LoginScreen());
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 60,
@@ -188,6 +195,7 @@ class SignupScreen extends StatelessWidget {
                     )),
                   ),
                 ),
+              ),
               ),
             ],
           ),

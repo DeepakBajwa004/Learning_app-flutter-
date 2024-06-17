@@ -26,9 +26,6 @@
 // }
 
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:learning_app/screens/category/category_screen.dart';
-import 'package:learning_app/screens/login/login_screen.dart';
-import 'package:learning_app/screens/search/search_screen.dart';
 import 'package:learning_app/screens/signup/signup_screen.dart';
 import 'package:motion/motion.dart';
 import 'package:flutter/material.dart' hide Card;
@@ -44,14 +41,14 @@ void main() async {
   Motion.instance.setUpdateInterval(60.fps);
 
   /// ... and run the sample app.
-  runApp(const MotionDemoApp());
+  runApp( MotionDemoApp());
 }
 
 class MotionDemoApp extends StatelessWidget {
-  const MotionDemoApp({super.key});
+  MotionDemoApp({super.key});
 
   @override
-  Widget build(BuildContext context) => const GetMaterialApp(
+  Widget build(BuildContext context) =>  GetMaterialApp(
     title: 'Motion Demo',
     debugShowCheckedModeBanner: false,
     home: SignupScreen(),

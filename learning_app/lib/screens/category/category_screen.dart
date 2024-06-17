@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:learning_app/controller/category/category_controller.dart';
 import 'package:learning_app/dummy_data/dummy_data.dart';
 
+import '../bottom_nav_bar/bottom_nav_bar.dart';
+
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
@@ -129,7 +131,9 @@ class CategoryScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 30),
                               height: 50,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offAll(()=>BotttomNavBar());
+                                },
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
