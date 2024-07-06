@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
+import '../../repositories/authentication.repo.dart';
+import '../../screens/category/category_screen.dart';
+import '../../utils/Loaders/loaders.dart';
 class SignupController extends GetxController{
 
   String validationMsg ='';
@@ -45,5 +47,22 @@ class SignupController extends GetxController{
     return null;
   }
 
+  final _authrepo =Get.put(AuthenticationRepo());
+
+
+  //signn up user with email and password
+  signUpWithEmailAndPassword () async{
+    try {
+      await _authrepo.registerUser(name.text, email.text, password.text);
+      Loaders.successfullySnackBar(
+          title: "Congratulations",
+          message: "Your Account created Successfully");
+      Get.offAll(CategoryScreen());
+    }catch(e){
+      Loaders.errorSnackBar(title: "Oh Snap", message: e);
+
+      print(e);
+    }
+  }
 
 }

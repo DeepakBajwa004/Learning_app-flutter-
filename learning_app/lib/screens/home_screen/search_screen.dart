@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../dummy_data/dummy_data.dart';
+
 class SearchBarScreen extends StatelessWidget {
    SearchBarScreen({super.key});
 
@@ -74,25 +76,67 @@ class SearchBarScreen extends StatelessWidget {
               Text("Categories",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black),),
               SizedBox(height: 20,),
 
-              GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 10.0,
-                childAspectRatio: 1,
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: List.generate(imgUrl.length, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(image: AssetImage("assets/riv/web_design.jpg")),
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(5.0),),
+              Container(
+                height: MediaQuery.of(context).size.height-320,
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 30,
+                      crossAxisSpacing: 20),
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1,
+                            )),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: Container(
+                                width: double.maxFinite,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Image(
+                                  fit: BoxFit.fitWidth,
+                                  image: AssetImage(DummyData
+                                      .categories[index].imageUrl),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  DummyData.categories[index].name,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }
+                    );
+                  },
                 ),
               ),
             ],
