@@ -151,7 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         trigFail!.change(false);
                         trigSuccess!.change(true); // for success
                         isChecking!.change(false);
-                        Get.off((CategoryScreen()));
                       } else{
                         isChecking!.change(false);
                         isHandsUp!.change(false);
@@ -159,6 +158,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         trigSuccess!.change(false);
                         isChecking!.change(false);
                       }
+
+                      controller.signInWithEmailAndPassword();
 
                     },
                     child: const Center(

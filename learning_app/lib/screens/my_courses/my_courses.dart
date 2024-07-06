@@ -1,49 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:learning_app/screens/home_screen/silver_appbar/cart_screen.dart';
-import 'package:learning_app/screens/home_screen/silver_appbar/notification_screen.dart';
-import 'package:learning_app/screens/home_screen/silver_appbar/search_bar.dart';
 
-import 'backgruond_wave.dart';
-
-class SliverSearchAppBar extends SliverPersistentHeaderDelegate {
-  const SliverSearchAppBar();
+import '../home_screen/silver_appbar/cart_screen.dart';
+import '../home_screen/silver_appbar/notification_screen.dart';
+class MyCourses extends StatelessWidget {
+  const MyCourses({super.key});
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    var adjustedShrinkOffset =
-        shrinkOffset > minExtent ? minExtent : shrinkOffset;
-    double offset = (minExtent - adjustedShrinkOffset) * 0.5;
-    double topPadding = MediaQuery.of(context).padding.top + 37;
-    double offsett = (maxExtent - adjustedShrinkOffset)*0.2;
-    double topPaddingg = MediaQuery.of(context).padding.top -40;
-
-    return Stack(
-        fit: StackFit.passthrough,
-        children: [
-      Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(bottomRight: Radius.circular(137)),
-          gradient: LinearGradient(
-              colors: [
-                Colors.blue.shade100,
-                Colors.blue.shade400,
-                Colors.blue.shade700,
-
-              ]
-          )
-      ),
-      height: 280,),
-          const BackgroundWave(
-            height: 280,
-          ),
-          Positioned(
-              top: offsett+topPaddingg,
-              left: 16,right: 10,
-              child:
-              Row(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+             padding: EdgeInsets.symmetric(horizontal: 20,vertical: 45),
+              height: MediaQuery.of(context).size.height/5,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomRight: Radius.circular(100),bottomLeft: Radius.circular(30)),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.lightBlue,
+                    Colors.blue.shade700,
+                    Colors.blueAccent,
+                  ]
+                )
+              ),
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -90,24 +75,33 @@ class SliverSearchAppBar extends SliverPersistentHeaderDelegate {
                   ),
                 ],
               ),
-          ),
-          Positioned(
-            top: topPadding + offset,
-            child:  SearchBarrr(),
-            left: 16,
-            right: 16,
-          )
-        ],
+            ),
+            
+            SizedBox(height: 30,),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0,right: 20),
+              child: Column(
+                children: [
+                  Text('My couses',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black),),
+                  SizedBox(height: 20,),
+                  Stack(
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height/2.7,
+                        width: MediaQuery.of(context).size.width/1-100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
-
-  @override
-  double get maxExtent => 280;
-
-  @override
-  double get minExtent => 140;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      oldDelegate.maxExtent != maxExtent || oldDelegate.minExtent != minExtent;
 }

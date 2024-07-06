@@ -7,7 +7,6 @@ import 'package:learning_app/screens/category/category_screen.dart';
 import 'package:learning_app/screens/login/login_screen.dart';
 import 'package:motion/motion.dart';
 
-import '../bottom_nav_bar/bottom_nav_bar.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -16,7 +15,9 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SignupController());
     return Scaffold(
+      backgroundColor: Color(0xFFD6E2EA),
       appBar: AppBar(
+        backgroundColor: Color(0xFFD6E2EA),
         centerTitle: true,
         title: const Text(
           'Create new account',
@@ -132,7 +133,7 @@ class SignupScreen extends StatelessWidget {
               InkWell(
                 onTap: () {
                   if (controller.formKey.currentState!.validate()) {
-                    Get.to(const CategoryScreen());
+                    controller.signUpWithEmailAndPassword();
                   }
                 },
                 child: Motion.elevated(
